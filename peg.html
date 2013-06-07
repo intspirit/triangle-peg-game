@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="javascript/Board.js"></script>
+    <script src="javascript/StepFinder.js"></script>
+    <script src="javascript/Step.js"></script>
+    <script src="javascript/Game.js"></script>
+    <script src="javascript/UI.js"></script>
+    <style>
+        span {
+            border: #000 solid 1px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+        }
+        .r-1 {
+            margin-left: 40px;
+        }
+        .r-2 {
+            margin-left: 30px;
+        }
+        .r-3 {
+            margin-left: 20px;
+        }
+        .r-4 {
+            margin-left: 10px;
+        }
+        .r-5 {
+
+         }
+    </style>
+</head>
+<body>
+<div>Selcet empty whole</div>
+<div class="r-1">
+    <span id="1">1</span>
+</div>
+<div class="r-2">
+    <span id="2">2</span>
+    <span id="3">3</span>
+</div>
+<div class="r-3">
+    <span id="4">4</span>
+    <span id="5">5</span>
+    <span id="6">6</span>
+</div>
+<div class="r-4">
+    <span id="7">7</span>
+    <span id="8">8</span>
+    <span id="9">9</span>
+    <span id="10">10</span>
+</div>
+<div class="r-5">
+    <span id="11">11</span>
+    <span id="12">12</span>
+    <span id="13">13</span>
+    <span id="14">14</span>
+    <span id="15">15</span>
+</div>
+
+<div id="steps"></div>
+<script>
+    var wholes = document.getElementsByTagName('span');
+    var stepsDiv = document.getElementById("steps");
+    var output = "";
+    for (var i = 0; i < wholes.length; i++){
+        addHandler(wholes[i], "click", function(){
+            window.G = new PegGame.Game([this.id]);
+            output = "";
+            for(var i = 0; i < G.successSteps.length; i++){
+
+                var stepOrder = G.successSteps[i];
+                for(var j = 0; j < stepOrder.length; j++){
+                    output += "<br/>From: " + stepOrder[j].from + " To: " + stepOrder[j].to + ";"
+                }
+                output += "<br/>=================================================================";
+            }
+            stepsDiv.innerHTML = output;
+        })
+    }
+
+</script>
+</body>
+</html>
